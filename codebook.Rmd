@@ -1,0 +1,100 @@
+---
+title: |
+    | Getting and Cleaning Data Course Project
+    | Codebook
+date: "17/JAN/2022"
+author: "Idriss .S"
+output: pdf_document
+---
+
+\vspace{20mm} 
+
+\begin{center}
+ \Large Variables used and their description
+\end{center}
+
+1. $\textbf{\textcolor{red}{data\_features}}$
+  + class : _data.frame_
+  + desciption : contains the names of 561 variables with ID
+  + __used to select all the variable which contains "mean" and "std" in their name__
+  
+2. $\textbf{\textcolor{red}{activity\_labels}}$
+  + class : _data.frame_
+  + desciption : contains 6 variables with ID
+  + __used to transform the values of the variable "activity_label__
+
+## Test set
+3. $\textbf{\textcolor{red}{data\_Xtest}}$
+  + class : _data.frame_
+  + desciption : contains __2947__ observations of the __561__ variables present in the variable $\textbf{\textcolor{red}{data\_features}}$
+  + __store all observations from the test set__
+  
+4. $\textbf{\textcolor{red}{data\_Ytest}}$
+  + class : _data.frame_
+  + desciption : contains the ID of the training selected for each observation present in $\textbf{\textcolor{red}{data\_Xtest}}$
+  + __used to determine which activity is associated to each observation__
+  
+5. $\textbf{\textcolor{red}{data\_subject\_test}}$
+  + class : _data.frame_
+  + desciption : contains the ID of the volunteer associating to each observation present in $\textbf{\textcolor{red}{data\_Xtest}}$
+  + __used to associate each observation to a specific volunteer__
+
+6. $\textbf{\textcolor{red}{data\_test}}$
+  + class : _data.frame_
+  + desciption : merge of $\textbf{\textcolor{red}{data\_subject\_test}}$, $\textbf{\textcolor{red}{data\_Ytest}}$ and $\textbf{\textcolor{red}{data\_Xtest}}$ with __2947__ observations of the __563__ variables
+
+## Training set
+7. $\textbf{\textcolor{red}{data\_Xtrain}}$
+  + class : _data.frame_
+  + desciption : contains __7352__ observations of the 561 variables present in the variable $\textbf{\textcolor{red}{data\_features}}$
+  + __store all observations from the training set__
+  
+8. $\textbf{\textcolor{red}{data\_Ytrain}}$
+  + class : _data.frame_
+  + desciption : contains the ID of the training selected for each observation present in $\textbf{\textcolor{red}{data\_Xtrain}}$
+  + __used to determine which activity is associated to each observation__
+  
+9. $\textbf{\textcolor{red}{data\_subject\_train}}$
+  + class : _data.frame_
+  + desciption : contains the ID of the volunteer associating to each observation present in $\textbf{\textcolor{red}{data\_Xtrain}}$
+  + __used to associate each observation to a specific volunteer__
+
+10. $\textbf{\textcolor{red}{data\_train}}$
+  + class : _data.frame_
+  + desciption : merge of $\textbf{\textcolor{red}{data\_subject\_train}}$, $\textbf{\textcolor{red}{data\_Ytrain}}$ and $\textbf{\textcolor{red}{data\_Xtrain}}$ with __7352__ observations of the __563__ variables
+  
+  
+## Next variable
+
+11. $\textbf{\textcolor{red}{data\_merged}}$
+  + class : _data.frame_
+  + desciption : merge of $\textbf{\textcolor{red}{data\_test}}$ and $\textbf{\textcolor{red}{data\_train}}$ that contains __2947 + 7352 = 10299__ observations of __561 + 2 = 563__ variables.
+  
+12. $\textbf{\textcolor{red}{data\_extract}}$
+  + class : _data.frame_
+  + desciption : extraction of all observation from $\textbf{\textcolor{red}{data\_merged}}$ when the names of variables contain "[Mm]ean". Contains __10299__ observations of __53__ variables.
+  
+13. $\textbf{\textcolor{red}{data\_extract2}}$
+  + class : _data.frame_
+  + desciption : extraction of all observation from $\textbf{\textcolor{red}{data\_merged}}$ when the names of variables contain "Ss][Tt][Dd]". Contains __10299__ observations of __33__ variables.
+  
+14. $\textbf{\textcolor{red}{data\_selected}}$
+  + class : _data.frame_
+  + desciption : merge of $\textbf{\textcolor{red}{data\_merged[ ,1]}}$, $\textbf{\textcolor{red}{data\_merged[ ,2]}}$, $\textbf{\textcolor{red}{data\_extract}}$ and $\textbf{\textcolor{red}{data\_extract2}}$. Contains __10299__ observations of __53 + 33 = 88__ variables.
+  + $\textbf{\textcolor{red}{data\_merged[ ,1]}}$ : contains vulunteers IDs
+  + $\textbf{\textcolor{red}{data\_merged[ ,2]}}$ : contains activitys labels for each observations
+
+14. $\textbf{\textcolor{red}{names\_data\_mean}}$
+  + class : _data.frame_
+  + desciption : storage variable that contains formated name for all variables from the variable $\textbf{\textcolor{red}{data\_extract}}$
+  
+15. $\textbf{\textcolor{red}{names\_data\_std\_dev}}$
+  + class : _data.frame_
+  + desciption : storage variable that contains formated name for all variables from the variable $\textbf{\textcolor{red}{data\_extract2}}$
+  
+16. $\textbf{\textcolor{red}{average\_values}}$
+  + class : _data.frame_
+  + desciption : summarise the variable $\textbf{\textcolor{red}{data\_selected}}$ by taking the mean of each variable for each activity and each subject. Contains __6 x 30__ observations of the __88__ variables from $\textbf{\textcolor{red}{data\_selected}}$.
+  + 6 : number of activity
+  + 30 : number of vulunteers
+  + The mean is obtained by grouping observations in $\textbf{\textcolor{red}{data\_selected}}$ with the subject IDs then the activity labels.

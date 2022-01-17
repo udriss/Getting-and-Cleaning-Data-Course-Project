@@ -1,38 +1,25 @@
 library(dplyr)
 library(magrittr)
 
-
-
-
-
-
 data_features<-read.table(file = "./features.txt",strip.white = T)
 activity_labels<-read.table(file = "./activity_labels.txt",strip.white = T)
-
-
-
 
 ########### 1. Merge the training and the test sets to create one data set
 ## Test set
 # Open training set file and store in data_Xtest
-# data_Xtest<-read.table(file = "./X_test.txt",strip.white = T)
+data_Xtest<-read.table(file = "./X_test.txt",strip.white = T)
 data_Ytest<-read.table(file = "./y_test.txt")
 data_subject_test<-read.table(file = "./subject_test.txt")
 data_test<-data.frame(data_subject_test,data_Ytest,data_Xtest)
 colnames(data_test)<-c("subject_ID","activity_label",data_features[,2])
 
-
-
 ## Training set
 # Open test set file and store in data_Xtrain
-# data_Xtrain<-read.table(file = "./X_train.txt",strip.white = T)
+data_Xtrain<-read.table(file = "./X_train.txt",strip.white = T)
 data_Ytrain<-read.table(file = "./y_train.txt")
 data_subject_train<-read.table(file = "./subject_train.txt")
 data_train<-data.frame(data_subject_train,data_Ytrain,data_Xtrain)
 colnames(data_train)<-c("subject_ID","activity_label",data_features[,2])
-
-
-
 
 
 ########### 2. Extract only the measurements on the mean and standard deviation for each measurement
@@ -48,18 +35,11 @@ data_selected<-data.frame(data_merged[,1],data_merged[,2],data_extract,data_extr
 colnames(data_selected)<-c("subject_ID","activity_label",names(data_extract),names(data_extract2))
 
 
-
-
-
 ########### 3. Uses descriptive activity names to name the activities in the data set
-
 # Loop to change values
 for (i in 1:length(activity_labels[,2])){
   data_selected$activity_label<-gsub(i,activity_labels[i,2],data_selected$activity_label)
 }
-
-
-
 
 
 ########### 4. Appropriately label the data set with descriptive variable names
@@ -94,7 +74,3 @@ data_selected %<>%
   group_by(subject_ID,activity_label)
 
 average_values<-data_selected %>% summarise(across(time.BodyAcc.mean.X:freq.BodyBodyGyroJerkMag.std,mean),.groups = "keep")
-
-
-
-
