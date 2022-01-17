@@ -1,5 +1,5 @@
 # Getting-and-Cleaning-Data-Course-Project
-Coursera project for the course 3, week 4.
+### Coursera project for the course 3, week 4.
 
 -----------
 ## Please check the code for further information and precision.
